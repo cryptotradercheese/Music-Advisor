@@ -1,0 +1,38 @@
+[1;31m
+Start test 1[0m
+> auth
+ƒhttps://accounts.spotify.com/authorize?client_id=f938a23eaa914af89b3c4c60c1fbd9a4&response_type=code&redirect_uri=http://localhost
+---SUCCESS---
+> exit
+---GOODBYE!---
+[1;31m
+Start test 2[0m
+> new
+(Please, provide access for application.
+> exit
+---GOODBYE!---
+[1;31m
+Start test 3[0m
+> featured
+(Please, provide access for application.
+> exit
+---GOODBYE!---
+[1;31m
+Start test 4[0m
+> auth
+ƒhttps://accounts.spotify.com/authorize?client_id=f938a23eaa914af89b3c4c60c1fbd9a4&response_type=code&redirect_uri=http://localhost
+---SUCCESS---
+> new
+---NEW RELEASES---
+!Mountains [Sia, Diplo, Labrinth]
+Runaway [Lil Peep]
+(The Greatest Show [Panic! At The Disco]
+All Out Life [Slipknot]
+> featured
+---FEATURED---
+Mellow Morning
+Wake Up and Smell the Coffee
+Monday Motivation
+Songs to Sing in the Shower
+> exit
+---GOODBYE!---
