@@ -401,7 +401,7 @@ files:
                 "}".replaceAll(spotifyServerUrl, resourceServerUrl);
 
 
-        private static final WebServerMock resourceServerMock = new WebServerMock(resourceServerPort)
+        private static final TempWebServerMock resourceServerMock = new TempWebServerMock(resourceServerPort)
                 .setPage("/v1/browse/categories", apiCategoriesResponse)
                 .setPage("/v1/browse/categories/party/playlists", apiPlaylistsPartyResponse)
                 // unpredictable error on toplists request!!!
@@ -451,6 +451,7 @@ files:
             userProgram.setReturnOutputAfterExecution(false);
 
             userProgram.execute("new");
+
             String outputAfterNew = userProgram.getOutput();
 
             if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
@@ -472,6 +473,7 @@ files:
             userProgram.setReturnOutputAfterExecution(false);
 
             userProgram.execute("featured");
+
             String outputAfterNew = userProgram.getOutput();
 
             if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
@@ -493,6 +495,7 @@ files:
             userProgram.setReturnOutputAfterExecution(false);
 
             userProgram.execute("categories");
+
             String outputAfterNew = userProgram.getOutput();
 
             if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
@@ -514,6 +517,7 @@ files:
             userProgram.setReturnOutputAfterExecution(false);
 
             userProgram.execute("playlists Party Time");
+
             String outputAfterNew = userProgram.getOutput();
 
             if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
@@ -555,6 +559,10 @@ files:
             auth(userProgram);
 
             userProgram.execute("new");
+
+            if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
+                return CheckResult.wrong("Access token is incorrect!");
+            }
 
             String outputAfterNew = userProgram.getOutput();
 
@@ -599,6 +607,10 @@ files:
 
             userProgram.execute("categories");
 
+            if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
+                return CheckResult.wrong("Access token is incorrect!");
+            }
+
             String outputAfterCategories = userProgram.getOutput();
 
             String category1 = "Top Lists";
@@ -629,6 +641,10 @@ files:
             auth(userProgram);
 
             userProgram.execute("featured");
+
+            if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
+                return CheckResult.wrong("Access token is incorrect!");
+            }
 
             String outputAfterFeatured = userProgram.getOutput();
 
@@ -666,6 +682,10 @@ files:
 
             userProgram.execute("playlists Party Time");
 
+            if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
+                return CheckResult.wrong("Access token is incorrect!");
+            }
+
             String outputAfterPartyPlaylist = userProgram.getOutput();
 
             String playlist1 =
@@ -702,6 +722,10 @@ files:
 
             userProgram.execute("playlists Party Time");
 
+            if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
+                return CheckResult.wrong("Access token is incorrect!");
+            }
+
             String outputAfterUnknownPlaylist = userProgram.getOutput();
 
             String playlist1 =
@@ -718,7 +742,7 @@ files:
                     || !outputAfterUnknownPlaylist.contains(playlist2)) {
 
                 return CheckResult.wrong("There are no playlists in correct format on \"playlists {name}\" action. " +
-                                "Make sure you correctly parsed the category name.");
+                        "Make sure you correctly parsed the category name.");
             }
 
             userProgram.execute("exit");
@@ -738,6 +762,10 @@ files:
             auth(userProgram);
 
             userProgram.execute("playlists Top Lists");
+
+            if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
+                return CheckResult.wrong("Access token is incorrect!");
+            }
 
             String outputAfterUnknownPlaylist = userProgram.getOutput();
 
@@ -868,6 +896,158 @@ files:
         }
     }
   learner_created: false
+- name: test/TempWebServerMock.java
+  visible: false
+  text: |
+    import org.hyperskill.hstest.exception.outcomes.WrongAnswer;
+    import org.hyperskill.hstest.mocks.web.WebPage;
+    import org.hyperskill.hstest.mocks.web.WebServerMock;
+    import org.hyperskill.hstest.mocks.web.request.HttpRequest;
+    import org.hyperskill.hstest.mocks.web.request.HttpRequestParser;
+
+    import java.io.DataInputStream;
+    import java.io.DataOutputStream;
+    import java.io.IOException;
+    import java.net.ServerSocket;
+    import java.net.Socket;
+    import java.util.HashMap;
+    import java.util.Map;
+
+    public class TempWebServerMock extends WebServerMock {
+
+        private static final String DELIM = "/";
+        private static final String fictiveAccessToken = "456456";
+        private static final String authorizationHeader = "Authorization";
+
+    //    public static void main(String[] args) { // for testing
+    //        org.hyperskill.hstest.mocks.web.WebServerMock ws = new org.hyperskill.hstest.mocks.web.WebServerMock(12345);
+    //        ws.start();
+    //        ws.run();
+    //    }
+
+        private ServerSocket serverSocket;
+        private final Map<String, String> pages = new HashMap<>();
+        private final int port;
+
+        private boolean isStarted = false;
+        private boolean isStopped = false;
+
+        private String access_token = "";
+
+        public TempWebServerMock(int port) {
+            super(port);
+            this.port = port;
+        }
+
+        public TempWebServerMock setPage(String url, String content) {
+            return setPage(url, new WebPage().setContent(content));
+        }
+
+        public TempWebServerMock setPage(String url, WebPage page) {
+            if (!url.startsWith(DELIM)) {
+                url = DELIM + url;
+            }
+            pages.put(url, page.contentWithHeader());
+            return this;
+        }
+
+        public String getAccess_token() {
+            return access_token;
+        }
+
+        private void checkRequestHeaders(HttpRequest request) throws WrongAnswer {
+            Map<String,String> requestHeaders = request.getHeaders();
+
+            if(requestHeaders.containsKey(authorizationHeader)) {
+                if(requestHeaders.get(authorizationHeader).contains(fictiveAccessToken)) {
+                    access_token = requestHeaders.get(authorizationHeader);
+                }
+            }
+        }
+
+        private String resolveRequest(DataInputStream input) {
+            HttpRequest request = HttpRequestParser.parse(input);
+            checkRequestHeaders(request);
+            return request != null ? request.getEndpoint() : null;
+        }
+
+        private void sendResponse(String path, DataOutputStream output) throws Exception {
+            String response;
+            if (path == null) {
+                response = "Webpage not found!";
+            } else {
+                if (!path.startsWith(DELIM)) {
+                    path = DELIM + path;
+                }
+                response = pages.getOrDefault(path, "Webpage not found!");
+            }
+            for (char c : response.toCharArray()) {
+                output.write(c);
+            }
+        }
+
+        private void handle(Socket socket) throws Exception {
+            DataInputStream input = new DataInputStream(socket.getInputStream());
+            DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+            sendResponse(resolveRequest(input), output);
+            input.close();
+            output.close();
+            socket.close();
+        }
+
+        public void start() {
+            try {
+                serverSocket = new ServerSocket(port);
+            } catch (IOException ignored) { }
+        }
+
+        public void run() {
+            try {
+                while (serverSocket != null && !serverSocket.isClosed()) {
+                    isStarted = true;
+                    isStopped = false;
+                    handle(serverSocket.accept());
+                }
+            } catch (Exception ignored) { }
+            isStarted = false;
+            isStopped = true;
+        }
+
+        public void stop() {
+            try {
+                if (serverSocket != null) {
+                    serverSocket.close();
+                }
+            } catch (IOException ignored) { }
+        }
+
+        public boolean isStarted() {
+            return isStarted;
+        }
+
+        public boolean isStopped() {
+            return isStopped;
+        }
+    }
+  learner_created: false
+- name: src/advisor/ClientCode.java
+  visible: true
+  learner_created: true
+- name: src/advisor/util/Parser.java
+  visible: true
+  learner_created: true
+- name: src/advisor/util/SpotifyInteraction.java
+  visible: true
+  learner_created: true
+- name: src/advisor/util/Code.java
+  visible: true
+  learner_created: true
+- name: src/advisor/util/Server.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/62/stages/338/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Sat, 13 Nov 2021 12:40:47 UTC
 record: -1

@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/210107/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Tue, 12 Oct 2021 09:42:49 UTC
+update_date: Sat, 13 Nov 2021 08:43:41 UTC
 stages:
 - id: 335
   step: 5477
@@ -16,7 +16,7 @@ stages:
   is_completed: true
 - id: 338
   step: 5480
-  is_completed: false
+  is_completed: true
 - id: 339
   step: 5481
   is_completed: false
@@ -26,8 +26,16 @@ topics:
     theory_id: 3739
   - title: Units of information
     theory_id: 6865
+  - title: Immutability
+    theory_id: 7929
   - title: IDE
     theory_id: 10996
+  - title: Computer algorithms
+    theory_id: 16547
+  - title: The big O notation
+    theory_id: 16699
+  - title: Data structures
+    theory_id: 5161
   - title: Computer programming
     theory_id: 8739
   - title: Introduction to Java
@@ -90,18 +98,44 @@ topics:
     theory_id: 5035
   - title: Array
     theory_id: 3511
+  - title: Iterating over arrays
+    theory_id: 3602
   - title: Arrays as parameters
     theory_id: 3594
   - title: String
     theory_id: 3523
   - title: IntelliJ IDEA
     theory_id: 3801
+  - title: Pseudocode
+    theory_id: 15090
+  - title: Fixed-size array
+    theory_id: 7255
+  - title: Dynamic array
+    theory_id: 5357
+  - title: Errors in programs
+    theory_id: 3536
   - title: StringBuilder
     theory_id: 3812
   - title: Package
     theory_id: 3621
+  - title: What is an exception
+    theory_id: 3497
+  - title: NPE
+    theory_id: 1945
   - title: Processing strings
     theory_id: 3551
+  - title: Introduction to generic programming
+    theory_id: 3492
+  - title: Generics and Object
+    theory_id: 3493
+  - title: What are collections
+    theory_id: 3770
+  - title: ArrayList
+    theory_id: 3567
+  - title: The Collections Framework overview
+    theory_id: 3624
+  - title: The List interface
+    theory_id: 3581
   - title: Defining classes
     theory_id: 3618
   - title: Constructor
@@ -112,6 +146,20 @@ topics:
     theory_id: 4727
   - title: Interface
     theory_id: 3615
+  - title: Access modifiers
+    theory_id: 3589
+  - title: Getters and setters
+    theory_id: 3599
+  - title: Inheritance
+    theory_id: 3583
+  - title: Protected modifier
+    theory_id: 6692
+  - title: Referencing subclass objects
+    theory_id: 3585
+  - title: The Object class
+    theory_id: 3596
+  - title: Boxing and unboxing
+    theory_id: 3595
   - title: Comparable
     theory_id: 14456
   1:
@@ -125,23 +173,9 @@ topics:
     theory_id: 3534
   - title: Initialization blocks
     theory_id: 3533
-  - title: Access modifiers
-    theory_id: 3589
-  - title: Getters and setters
-    theory_id: 3599
-  - title: Inheritance
-    theory_id: 3583
-  - title: Protected modifier
-    theory_id: 6692
-  - title: Referencing subclass objects
-    theory_id: 3585
-  - title: The Object class
-    theory_id: 3596
   2:
   - title: JVM, JRE, and JDK
     theory_id: 3499
-  - title: Immutability
-    theory_id: 7929
   - title: World Wide Web
     theory_id: 6633
   - title: HyperText Transfer Protocol
@@ -166,16 +200,10 @@ topics:
     theory_id: 8977
   - title: Parameters and options
     theory_id: 9746
-  - title: Errors in programs
-    theory_id: 3536
-  - title: What is an exception
-    theory_id: 3497
   - title: Hierarchy of exceptions
     theory_id: 3570
   - title: Exception handling
     theory_id: 3552
-  - title: NPE
-    theory_id: 1945
   - title: Build tools
     theory_id: 4284
   - title: Java Archive
@@ -190,8 +218,6 @@ topics:
     theory_id: 7917
   - title: Dependency management
     theory_id: 5076
-  - title: Introduction to generic programming
-    theory_id: 3492
   - title: Multiple constructors
     theory_id: 3538
   - title: Annotations basics
@@ -210,21 +236,17 @@ topics:
     theory_id: 3564
   - title: Abstract class vs interface
     theory_id: 3563
-  - title: Boxing and unboxing
-    theory_id: 3595
   3:
   - title: HTTP Basic Auth
     theory_id: 7778
   - title: REST
     theory_id: 7834
-  - title: Generics and Object
-    theory_id: 3493
   - title: Generic methods
     theory_id: 3606
   4:
-  - title: Singleton
-    theory_id: 3555
   - title: Strategy
     theory_id: 3556
+  - title: Singleton
+    theory_id: 3555
   - title: Encapsulating object creation
     theory_id: 3577
