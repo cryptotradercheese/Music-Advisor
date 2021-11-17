@@ -10,3 +10,4 @@ content:
 - Interruptions
 - Executors
 - Callable and Future
+- Singleton

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MusicAdvisorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-13T12:40:39" hostname="user-computer" time="8.274">
+<testsuite name="MusicAdvisorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-17T09:44:33" hostname="user-computer" time="5.959">
   <properties/>
-  <testcase name="start" classname="MusicAdvisorTest" time="8.274"/>
+  <testcase name="start" classname="MusicAdvisorTest" time="5.959"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 > auth
@@ -31,18 +31,26 @@ Tester: done request 3: Got the code. Return back to your program.
 ---SUCCESS---
 > categories
 Top Lists
+
+---PAGE 1 OF 3---
+> next
 Super Mood
+
+---PAGE 2 OF 3---
+> next
 Party Time
 
-> exit
+---PAGE 3 OF 3---
+> prev
+Super Mood
+
+---PAGE 2 OF 3---
+> prev
+Top Lists
+
+---PAGE 1 OF 3---
 ?[1;31m
 Start test 3?[0m
-> categories
-Please, provide access for application.
-> exit
----GOODBYE!---
-?[1;31m
-Start test 4?[0m
 > auth
 use this link to request the access code:
 http://127.0.0.1:45678/authorize?client_id=f938a23eaa914af89b3c4c60c1fbd9a4&response_type=code&redirect_uri=http://localhost:8080
@@ -58,19 +66,20 @@ Tester: done request 3: Got the code. Return back to your program.
 Monday Morning Mood
 http://open.spotify.com/user/spotify/playlist/6ftJBzU2LLQcaKefMi7ee7
 
+---PAGE 1 OF 2---
+> next
 Upp och hoppa!
 http://open.spotify.com/user/spotify__sverige/playlist/4uOEx4OUrkoGNZoIlWMUbO
 
+---PAGE 2 OF 2---
+> prev
+Monday Morning Mood
+http://open.spotify.com/user/spotify/playlist/6ftJBzU2LLQcaKefMi7ee7
 
+---PAGE 1 OF 2---
 > exit
 ?[1;31m
-Start test 5?[0m
-> featured
-Please, provide access for application.
-> exit
----GOODBYE!---
-?[1;31m
-Start test 6?[0m
+Start test 4?[0m
 > auth
 use this link to request the access code:
 http://127.0.0.1:45678/authorize?client_id=f938a23eaa914af89b3c4c60c1fbd9a4&response_type=code&redirect_uri=http://localhost:8080
@@ -87,20 +96,26 @@ Runnin'
 [Pharrell Williams]
 https://open.spotify.com/album/5ZX4m5aVSmWQ5iHAPQpT71
 
+---PAGE 1 OF 2---
+> prev
+No more pages.
+> next
 Sneakin'
-[Drake2, Drake3]
+[Drake2]
 https://open.spotify.com/album/0geTzdk2InlqIoB16fW9Nd
 
+---PAGE 2 OF 2---
+> next
+No more pages.
+> prev
+Runnin'
+[Pharrell Williams]
+https://open.spotify.com/album/5ZX4m5aVSmWQ5iHAPQpT71
 
+---PAGE 1 OF 2---
 > exit
 ?[1;31m
-Start test 7?[0m
-> new
-Please, provide access for application.
-> exit
----GOODBYE!---
-?[1;31m
-Start test 8?[0m
+Start test 5?[0m
 > auth
 use this link to request the access code:
 http://127.0.0.1:45678/authorize?client_id=f938a23eaa914af89b3c4c60c1fbd9a4&response_type=code&redirect_uri=http://localhost:8080
@@ -116,54 +131,17 @@ Tester: done request 3: Got the code. Return back to your program.
 Noite Eletronica
 http://open.spotify.com/user/spotifybrazilian/playlist/4k7EZPI3uKMz4aRRrLVfen
 
+---PAGE 1 OF 2---
+> next
 Festa Indie
 http://open.spotify.com/user/spotifybrazilian/playlist/4HZh0C9y80GzHDbHZyX770
 
-
-> exit
-?[1;31m
-Start test 9?[0m
-> playlists Party Time
-Please, provide access for application.
-> exit
----GOODBYE!---
-?[1;31m
-Start test 10?[0m
-> auth
-use this link to request the access code:
-http://127.0.0.1:45678/authorize?client_id=f938a23eaa914af89b3c4c60c1fbd9a4&response_type=code&redirect_uri=http://localhost:8080
-waiting for code...
-Tester: making requests to redirect uri: http://localhost:8080
-Tester: done request 1: Authorization code not found. Try again.
-Tester: done request 2: Authorization code not found. Try again.
-code received
-making http request for access_token...
-Tester: done request 3: Got the code. Return back to your program.
----SUCCESS---
-> playlists Top Lists
-Test unpredictable error message
-> exit
-?[1;31m
-Start test 11?[0m
-> auth
-use this link to request the access code:
-http://127.0.0.1:45678/authorize?client_id=f938a23eaa914af89b3c4c60c1fbd9a4&response_type=code&redirect_uri=http://localhost:8080
-waiting for code...
-Tester: making requests to redirect uri: http://localhost:8080
-Tester: done request 1: Authorization code not found. Try again.
-Tester: done request 2: Authorization code not found. Try again.
-code received
-making http request for access_token...
-Tester: done request 3: Got the code. Return back to your program.
----SUCCESS---
-> playlists Party Time
+---PAGE 2 OF 2---
+> prev
 Noite Eletronica
 http://open.spotify.com/user/spotifybrazilian/playlist/4k7EZPI3uKMz4aRRrLVfen
 
-Festa Indie
-http://open.spotify.com/user/spotifybrazilian/playlist/4HZh0C9y80GzHDbHZyX770
-
-
+---PAGE 1 OF 2---
 > exit
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

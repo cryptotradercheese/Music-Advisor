@@ -49,6 +49,9 @@
             <option value="$PROJECT_DIR$/Topics/LocalTime/Return time without seconds" />
             <option value="$PROJECT_DIR$/Topics/LocalTime/Seconds since start of a day" />
             <option value="$PROJECT_DIR$/Topics/LocalTime/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Singleton/Complete a class" />
+            <option value="$PROJECT_DIR$/Topics/Singleton/Complete the eager singleton" />
+            <option value="$PROJECT_DIR$/Topics/Singleton/Theory" />
             <option value="$PROJECT_DIR$/Topics/Thread management/Calculate the number of distinct characters" />
             <option value="$PROJECT_DIR$/Topics/Thread management/Ordering the execution of threads" />
             <option value="$PROJECT_DIR$/Topics/Thread management/Summing with threads" />
